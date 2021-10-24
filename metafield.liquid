@@ -1,0 +1,25 @@
+//I am trying to use metafields to output information on my site. I may be making a very basic error. Please enlighten me as to where I am going wrong. Thank you! //
+
+ <button
+                      class="btn {% if section.settings.enable_payment_button %}btn--secondary{% else %}btn--subtle-hover{% endif %}"
+                      type="submit"
+                      name="add"
+                      data-add-to-cart
+                      {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+                        <span data-add-to-cart-text>
+                          {% if current_variant.available %}
+                            {{ 'products.product.add_to_cart' | t }}
+                                                    
+                         {% elsif 'products.product.sold_out' and product.metafields.my_fields.not_available_for_retail_ != true %}
+           <div class="badge badge--sold-out"><span class="badge-label">{{ 'products.product.sold_out' | t }}</span></div>
+           {% elsif sold_out and product.metafields.my_fields.not_available_for_retail == true %}
+               <div class="badge badge--sold-out"><span class="badge-label">{{ metafields.product.stock.value }}</span></div> 
+ {% endif %}
+                          
+                        {% comment %}  {% else %}
+                            {{ 'products.product.sold_out' | t }}
+                          {% endif %} 
+                          {% endcomment %}
+                        
+                        </span>
+                    </button>
